@@ -12,8 +12,10 @@ TaxCalculator::TaxCalculator(TaxBrackets tBrackets, double expense) {
     
     this->requiredIncome = this->variableRateCalc(tb.getBrackets(), expense);
     
-    cout << "Expenses: $" << expense << endl;
-    cout << "Required Income: $" << this->requiredIncome << endl;
+    printf("Expenses: $%.02f\nRequired Income: $%.02f\n", expense, requiredIncome);
+    
+//    cout << "Expenses: $" << expense << endl;
+//    cout << "Required Income: $" << this->requiredIncome << endl;
 }
 
 double TaxCalculator::getIncome() {

@@ -21,22 +21,20 @@ vector<TaxBrackets::Bracket> TaxBrackets::getBrackets() {
 }
 
 void TaxBrackets::printBrackets() {
-    cout << "Bottom\t\tTop\t\t\tTax Rate" << endl;
+    cout << "Bottom\t\tTop\t\t\tTax Rate\tMax Tax Num" << endl;
     for (int i = 0; i < taxBrackets.size(); i++) {
         //print bottom
-        if (taxBrackets.at(i).bottom == 0) {
-            cout << taxBrackets.at(i).bottom << "\t\t\t";
-        } else {
-            cout << taxBrackets.at(i).bottom << "\t\t";
-        }
+        printf("%5d\t\t", taxBrackets.at(i).bottom);
         //print top
         if (taxBrackets.at(i).top == INT_MAX) {
-            cout << "inf." << "\t\t";
+            printf("inf.\t\t");
         } else {
-            cout << taxBrackets.at(i).top << "\t\t";
+            printf("%5d\t\t", taxBrackets.at(i).top);
         }
         //print tax rate
-        cout << taxBrackets.at(i).taxRate << endl;
+        printf("%5.5f\t\t", taxBrackets.at(i).taxRate);
+        //print max tax num
+        printf("%5.2f\n", taxBrackets.at(i).maxTaxedNum);
     }
     cout << endl;
 }

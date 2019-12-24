@@ -9,10 +9,7 @@ private:
     double requiredIncome;
     TaxBrackets tb;
     bool inRange(double value, TaxBrackets::Bracket b) {
-        if (value > b.bottom && value <= b.top) {
-            return true;
-        }
-        return false;
+        return (value > b.bottom && value <= b.top);
     }
     
 public:

@@ -1,6 +1,3 @@
-// Programmer: Parjanya Brahmachari
-// Programmer’s ID: 1726560
-
 #ifndef TaxBrackets_hpp
 #define TaxBrackets_hpp
 

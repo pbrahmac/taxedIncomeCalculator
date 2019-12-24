@@ -1,6 +1,3 @@
-// Programmer: Parjanya Brahmachari
-// Programmer’s ID: 1726560
-
 #ifndef TaxCalculator_hpp
 #define TaxCalculator_hpp
 

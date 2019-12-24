@@ -1,6 +1,3 @@
-// Programmer: Parjanya Brahmachari
-// Programmer’s ID: 1726560
-
 #include "TaxCalculator.hpp"
 
 TaxCalculator::TaxCalculator(double expense) {

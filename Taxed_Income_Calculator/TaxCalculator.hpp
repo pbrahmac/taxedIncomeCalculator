@@ -13,7 +13,6 @@ private:
     }
     
 public:
-    
     TaxCalculator(double);
     TaxCalculator(TaxBrackets, double);
     

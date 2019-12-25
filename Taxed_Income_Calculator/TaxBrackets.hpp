@@ -26,7 +26,6 @@ public:
     TaxBrackets(vector<Bracket>);
     //get method
     vector<Bracket> getBrackets();
-    //set method
     //print
     void printBrackets();
 };

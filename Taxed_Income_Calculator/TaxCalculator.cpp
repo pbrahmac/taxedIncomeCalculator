@@ -1,26 +1,19 @@
 #include "TaxCalculator.hpp"
 
-TaxCalculator::TaxCalculator(double expense) {
-    this->requiredIncome = this->variableRateCalc(tb.getBrackets(), expense);
-    printf("Expenses: $%.02f\nRequired Income: $%.02f\n", expense, requiredIncome);
-}
-
-TaxCalculator::TaxCalculator(TaxBrackets tBrackets, double expense) {
+TaxCalculator::TaxCalculator(TaxBrackets tBrackets) {
     this->tb = tBrackets;
-    
-    this->requiredIncome = this->variableRateCalc(tb.getBrackets(), expense);
-    printf("Expenses: $%.02f\nRequired Income: $%.02f\n", expense, requiredIncome);
 }
 
 double TaxCalculator::getIncome() {
     return this->requiredIncome;
 }
 
-double TaxCalculator::fixedRateCalc(double expense, double taxRate) {
+double TaxCalculator::fixedRateIncome(double expense, double taxRate) {
     return expense / (1 - taxRate);
 }
 
-double TaxCalculator::variableRateCalc(vector<TaxBrackets::Bracket> taxBrackets, double expense) {
+double TaxCalculator::variableRateIncome(double expense) {
+    vector<TaxBrackets::Bracket> taxBrackets = this->tb.getBrackets();
     int minBracket = 0;
     double totalTax = 0;
     while (expense >= taxBrackets.at(minBracket).top) {
@@ -32,7 +25,7 @@ double TaxCalculator::variableRateCalc(vector<TaxBrackets::Bracket> taxBrackets,
     
     for (int i = minBracket; i < taxBrackets.size(); i++) {
         if (inRange((expense+totalTax), taxBrackets.at(i))) {
-            totalIncome = fixedRateCalc(expense+totalTax-taxBrackets.at(i).bottom, taxBrackets.at(i).taxRate) + taxBrackets.at(i).bottom;
+            totalIncome = fixedRateIncome(expense+totalTax-taxBrackets.at(i).bottom, taxBrackets.at(i).taxRate) + taxBrackets.at(i).bottom;
             if (totalIncome <= taxBrackets.at(i).top) {
                 break;
             } else {
@@ -49,5 +42,30 @@ double TaxCalculator::variableRateCalc(vector<TaxBrackets::Bracket> taxBrackets,
         }
     }
     
+    this->requiredIncome = totalIncome;
+    printf("Expenses: $%.02f\nRequired Income: $%.02f\n", expense, totalIncome);
     return totalIncome;
+}
+
+double TaxCalculator::fixedRateTax(double income, double taxRate) {
+    double tax = (income * (1-taxRate));
+    printf("Tax: $%.2f\n", tax);
+    return tax;
+}
+
+double TaxCalculator::variableRateTax(double income) {
+    int minBracket = 0;
+    while (income > tb.getBrackets().at(minBracket).top) {
+        minBracket++;
+    }
+    
+    double totalTax = 0;
+    
+    for (int i = 0; i < minBracket; i++) {
+        totalTax += tb.getBrackets().at(i).maxTaxedNum;
+    }
+    totalTax += (income - tb.getBrackets().at(minBracket).bottom) * tb.getBrackets().at(minBracket).taxRate;
+    
+    printf("Tax: $%.2f\n", totalTax);
+    return totalTax;
 }

@@ -12,27 +12,10 @@ int main(int argc, const char * argv[]) {
     
     
     TaxBrackets fb(fileReader("federal.txt")), sb(fileReader("california.txt")), cb(combineBrackets(fb, sb));
+    TaxCalculator tc(cb);
     
-//    vector<TaxBrackets::Bracket> combinedBrackets = combineBrackets(fb, sb);
-//    combinedBrackets.push_back(TaxBrackets::Bracket(0, 16446, 0.11));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(16446, 19750, 0.12));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(19750, 38990, 0.14));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(38990, 61538, 0.16));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(61538, 80250, 0.18));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(80250, 85422, 0.28));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(85422, 107960, 0.30));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(107960, 171050, 0.313));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(171050, 326000, 0.333));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(326000, 414700, 0.413));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(414700, 551476, 0.443));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(551476, 622050, 0.453));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(622050, 661768, 0.473));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(661768, 1000000, 0.483));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(1000000, 1074996, 0.493));
-//    combinedBrackets.push_back(TaxBrackets::Bracket(1074996, INT_MAX, 0.503));
-    
-    double expenses = 100000;
-    TaxCalculator tc(cb, expenses);
+    tc.variableRateIncome(200000);
+    tc.variableRateTax(tc.getIncome());
 }
 
 vector<TaxBrackets::Bracket> fileReader(string fileName) {
